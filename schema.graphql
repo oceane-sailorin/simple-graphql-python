@@ -1,0 +1,41 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+type Resident {
+    id: ID!
+    name: String!
+    age: Int!
+    installed: Boolean!
+    installationDate: String!
+}
+
+type ResidentResult {
+    success: Boolean!
+    errors: [String]
+    resident: Resident
+}
+
+type ResidentsResult {
+    success: Boolean!
+    errors: [String]
+    residents: [Resident]
+}
+
+
+type Query {
+    residents: ResidentsResult!
+    resident(residentId: ID!): ResidentResult
+}
+
+type deleteResidentResult {
+    success: Boolean!,
+    errors: [String]
+}
+
+type Mutation {
+    createResident(name: String!, age: Int!, installed: Boolean!, installationDate: String!): ResidentResult!
+    deleteResident(residentId: ID!): deleteResidentResult!
+    installedResident(residentId: ID!): ResidentResult!
+    updateAgeResident(residentId: ID!, newAge: Int!): ResidentResult!
+}
